@@ -38,8 +38,7 @@ public class UserResource {
     @POST
     public Response createUser(User user) {
         userService.createUser(user);
-        URI uri = uriInfo.getAbsolutePathBuilder().path(String.valueOf(user.getId())).build();
-        return Response.created(uri).build();
+        return Response.status(Response.Status.CREATED).build();
     }
 
     @PUT
@@ -53,7 +52,7 @@ public class UserResource {
     @Path("{id}")
     public Response deleteUser(@PathParam("id") long id) {
         userService.deleteUser(id);
-        return Response.status(Response.Status.NO_CONTENT).build();
+        return Response.status(Response.Status.OK).build();
     }
 
 }
