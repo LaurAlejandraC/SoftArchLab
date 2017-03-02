@@ -1,5 +1,7 @@
 package arqsoft.authentication.model;
 
+import arqsoft.roles.model.Role;
+
 import javax.persistence.*;
 
 /**
@@ -15,17 +17,21 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private long userId;
 
     private String name;
     private String email;
 
-    public long getId() {
-        return id;
+    @ManyToOne(fetch = FetchType.LAZY, targetEntity = Role.class)
+    @JoinColumn(name = "roles", referencedColumnName = "roleId")
+    private Role role;
+
+    public long getUserId() {
+        return userId;
     }
 
-    public void setId(long id) {
-        this.id = id;
+    public void setUserId(long id) {
+        this.userId = id;
     }
 
     public String getName() {
